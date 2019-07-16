@@ -37,6 +37,28 @@ router.put('/performance/:id(\\d+)', (req, res) => {
   });
 });
 
+router.post('/performance', (req, res) => {
+  const { body } = req;
+  connection.query('INSERT INTO performance SET ?', body, (err) => {
+    if (err) {
+      res.sendStatus(500);
+    } else {
+      res.sendStatus(200);
+    }
+  });
+});
+
+router.delete('/performance/:id(\\d+)', (req, res) => {
+  const { id } = req.params;
+  connection.query('DELETE FROM performance  WHERE id=?', [id], (err) => {
+    if (err) {
+      res.sendStatus(500);
+    } else {
+      res.sendStatus(200);
+    }
+  });
+});
+
 router.get('/map', (req, res) => {
   connection.query('SELECT city, date from performance', (err, results) => {
     if (err) {
