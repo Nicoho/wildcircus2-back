@@ -5,7 +5,7 @@ const router = express.Router();
 
 
 router.get('/performance', (req, res) => {
-  connection.query('SELECT id, city, date from performance', (err, results) => {
+  connection.query('SELECT id, city, date, lat, longitude from performance', (err, results) => {
     if (err) {
       res.status(500).send('Erreur lors de la récupération des spectacles');
     } else {
